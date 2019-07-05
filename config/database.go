@@ -1,4 +1,4 @@
-package main
+package config
 
 import (
 	"context"
@@ -33,6 +33,7 @@ func dbConfig() *mongo.Client {
 	return client
 }
 
-func db() *mongo.Database {
+//DB config
+func DB() *mongo.Database {
 	return dbConfig().Database(os.Getenv("MONGO_DATABASE"))
 }

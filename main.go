@@ -1,14 +1,11 @@
 package main
 
 import (
-	"github.com/joho/godotenv"
-	"log"
+	"github.com/amiraliio/goSchedule/config"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal(".env file doesn't loaded")
-	}
-	schedule()
+	config.Instantiate()
+	app := new(config.AppProvider)
+	app.Task.List()
 }

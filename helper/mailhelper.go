@@ -1,14 +1,16 @@
-package helpers
+package helper
 
 import (
-	"github.com/amiraliio/goSchedule/models"
 	"log"
 	"net/smtp"
 	"os"
+
+	"github.com/amiraliio/goSchedule/model"
 )
 
 //SendEmail function
-func SendEmail(email models.Email) {
+func SendEmail(email model.Email) {
+
 	auth := smtp.PlainAuth("", os.Getenv("MAIL_USERNAME"), os.Getenv("MAIL_PASSWORD"), os.Getenv("MAIL_SERVER"))
 	receiver := []string{email.Receiver}
 	body := []byte(email.Body)
