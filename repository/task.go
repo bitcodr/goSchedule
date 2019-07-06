@@ -13,11 +13,6 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-//TaskRepo interface
-type TaskRepo interface {
-	interfaces.BaseInterFace
-}
-
 //Repository struct for sessions like database session
 type Repository struct{}
 

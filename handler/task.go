@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/amiraliio/goSchedule/helper"
+	"github.com/amiraliio/goSchedule/interfaces"
 	"github.com/amiraliio/goSchedule/model"
 	"github.com/amiraliio/goSchedule/repository"
 )
@@ -13,7 +14,7 @@ type TaskService struct {
 	ctx context.Context
 }
 
-func (s *TaskService) getTaskRepo() repository.TaskRepo {
+func (s *TaskService) getTaskRepo() interfaces.TaskRepo {
 	return &repository.Repository{}
 }
 
@@ -22,7 +23,7 @@ func (s *TaskService) List() {
 	filter := &model.Filter{
 		Limit: 3,
 	}
-	results := s.getTaskRepo().Get(ctx, filter)
+	results := s.getTaskRepo().List(s.ctx, filter)
 
 	for _, v := range results {
 		// if i == records - 1{
