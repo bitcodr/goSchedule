@@ -4,9 +4,9 @@ import (
 	"context"
 
 	"github.com/amiraliio/goSchedule/helper"
-	"github.com/amiraliio/goSchedule/interfaces"
 	"github.com/amiraliio/goSchedule/model"
 	"github.com/amiraliio/goSchedule/repository"
+	"github.com/amiraliio/goSchedule/repository/interfaces"
 )
 
 //TaskService to use other repository or database session

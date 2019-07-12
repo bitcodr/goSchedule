@@ -17,7 +17,7 @@ import (
 type Repository struct{}
 
 //List of tasks from mongo
-func List(context context.Context, filter *model.Filter) []*model.Task {
+func (r *Repository) List(context context.Context, filter *model.Filter) []*model.Task {
 	collection := config.DB().Collection(model.TaskCollection)
 	ctx, _ := helper.ContextTimeout(30)
 	query := bson.D{
@@ -60,6 +60,6 @@ func List(context context.Context, filter *model.Filter) []*model.Task {
 }
 
 //Get from mongo database
-func Get(context context.Context, filter *model.Filter, id string) []*model.Task {
+func (r *Repository) Get(context context.Context, filter *model.Filter, id string) []*model.Task {
 	return nil
 }
