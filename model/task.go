@@ -9,9 +9,12 @@ const Pending string = "p"
 //Done is status of done task
 const Done string = "d"
 
+//Failed is status of failed task
+const Failed string = "f"
+
 //Task model
 type Task struct {
-	Executedate int
+	ExecuteDate uint32
 	Reference   string
 	Email       Email
 }

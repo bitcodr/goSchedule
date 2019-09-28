@@ -14,6 +14,6 @@ func Instantiate() {
 func env() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal(".env file doesn't loaded")
+		log.Fatal(".env file couldn't loaded")
 	}
 }

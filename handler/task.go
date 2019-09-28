@@ -26,6 +26,7 @@ func (s *TaskService) List() {
 	results := s.getTaskRepo().List(s.ctx, filter)
 
 	for _, v := range results {
+		//TODO if
 		// if i == records - 1{
 		//             fmt.Println(i)
 		//     getTasks()

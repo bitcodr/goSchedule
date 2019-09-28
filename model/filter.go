@@ -2,6 +2,6 @@ package model
 
 //Filter model
 type Filter struct {
-	Page  int
-	Limit int
+	Page  int64
+	Limit int64
 }

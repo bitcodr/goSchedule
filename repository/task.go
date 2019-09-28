@@ -26,7 +26,7 @@ func (r *Repository) List(context context.Context, filter *model.Filter) []*mode
 			Value: model.Pending,
 		},
 		primitive.E{
-			Key: "execute_date",
+			Key: "executeDate",
 			Value: bson.D{
 				primitive.E{
 					Key:   "$lt",
@@ -36,8 +36,8 @@ func (r *Repository) List(context context.Context, filter *model.Filter) []*mode
 		},
 	}
 	findOptions := options.Find()
-	findOptions.SetLimit(int64(filter.Limit)).SetSort(primitive.M{
-		"execute_date": 1,
+	findOptions.SetLimit(filter.Limit).SetSort(primitive.M{
+		"executeDate": 1,
 	})
 	cursor, err := collection.Find(ctx, query, findOptions)
 	if err != nil {
