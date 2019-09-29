@@ -29,9 +29,11 @@ func (s *TaskService) List() {
 	for _, v := range results {
 		if helper.SendEmail(v.Email) {
 			fmt.Println(true)
+			continue
 			//TODO update the record state to active in the database collection
 		}
 		fmt.Println(false)
+		continue
 		//TODO update the record state to failed in the database collection
 	}
 
