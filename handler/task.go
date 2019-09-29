@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/amiraliio/goSchedule/helper"
 	"github.com/amiraliio/goSchedule/model"
@@ -26,13 +27,12 @@ func (s *TaskService) List() {
 	results := s.getTaskRepo().List(s.ctx, filter)
 
 	for _, v := range results {
-		//TODO if
-		// if i == records - 1{
-		//             fmt.Println(i)
-		//     getTasks()
-		//     return
-		// }
-		helper.SendEmail(v.Email)
+		if helper.SendEmail(v.Email) {
+			fmt.Println(true)
+			//TODO update the record state to active in the database collection
+		}
+		fmt.Println(false)
+		//TODO update the record state to failed in the database collection
 	}
 
 }

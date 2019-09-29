@@ -29,7 +29,7 @@ func (r *Repository) List(context context.Context, filter *model.Filter) []*mode
 			Key: "executeDate",
 			Value: bson.D{
 				primitive.E{
-					Key:   "$lt",
+					Key:   "$lte",
 					Value: time.Now().Unix(),
 				},
 			},
@@ -59,7 +59,7 @@ func (r *Repository) List(context context.Context, filter *model.Filter) []*mode
 	return results
 }
 
-//Get from mongo database
-func (r *Repository) Get(context context.Context, filter *model.Filter, id string) []*model.Task {
+//Update from mongo database
+func (r *Repository) Update(context context.Context, ID primitive.ObjectID) []*model.Task {
 	return nil
 }

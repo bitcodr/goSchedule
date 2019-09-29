@@ -1,5 +1,9 @@
 package model
 
+import (
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
+
 //TaskCollection is task collection name costant
 const TaskCollection string = "test"
 
@@ -14,7 +18,9 @@ const Failed string = "f"
 
 //Task model
 type Task struct {
-	ExecuteDate uint32
+	ID          primitive.ObjectID
+	ExecuteDate int64
 	Reference   string
+	Status      string
 	Email       Email
 }
