@@ -29,12 +29,16 @@ func (s *TaskService) List() {
 	for _, v := range results {
 		if helper.SendEmail(v.Email) {
 			fmt.Println(true)
+			v.Status = model.Done
+			task := s.getTaskRepo().Update(s.ctx, v)
+			fmt.Printf("%s %s %s", "Task performed", task.Reference, task.Status)
 			continue
-			//TODO update the record state to active in the database collection
 		}
 		fmt.Println(false)
+		v.Status = model.Failed
+		task := s.getTaskRepo().Update(s.ctx, v)
+		fmt.Printf("%s %s %s", "Task doesn't performed", task.Reference, task.Status)
 		continue
-		//TODO update the record state to failed in the database collection
 	}
 
 }

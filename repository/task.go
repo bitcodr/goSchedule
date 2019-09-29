@@ -60,6 +60,15 @@ func (r *Repository) List(context context.Context, filter *model.Filter) []*mode
 }
 
 //Update from mongo database
-func (r *Repository) Update(context context.Context, ID primitive.ObjectID) []*model.Task {
+func (r *Repository) Update(context context.Context, task *model.Task) *model.Task {
+	collection := config.DB().Collection(model.TaskCollection)
+	ctx, _ := helper.ContextTimeout(30)
+	updated, err := collection.UpdateOne(ctx, task.ID, task)
+	if err != nil {
+		log.Println("error in updated")
+	}
+	if updated.UpsertedCount > 0 {
+		return task
+	}
 	return nil
 }
