@@ -63,7 +63,24 @@ func (r *Repository) List(context context.Context, filter *model.Filter) []*mode
 func (r *Repository) Update(context context.Context, task *model.Task) *model.Task {
 	collection := config.DB().Collection(model.TaskCollection)
 	ctx, _ := helper.ContextTimeout(30)
-	updated, err := collection.UpdateOne(ctx, task.ID, task)
+	id := bson.D{
+		primitive.E{
+			Key:   "_id",
+			Value: task.ID,
+		},
+	}
+	model := bson.D{
+		primitive.E{
+			Key: "$set",
+			Value: bson.D{
+				primitive.E{
+					Key:   "status",
+					Value: model.Done,
+				},
+			},
+		},
+	}
+	updated, err := collection.UpdateOne(ctx, id, model)
 	if err != nil {
 		log.Println("error in updated")
 	}
