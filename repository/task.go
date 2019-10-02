@@ -82,7 +82,7 @@ func (r *Repository) Update(context context.Context, task *model.Task) *model.Ta
 	}
 	updated, err := collection.UpdateOne(ctx, id, model)
 	if err != nil {
-		log.Println("error in updated")
+		log.Println("error while updated")
 	}
 	if updated.UpsertedCount > 0 {
 		return task
