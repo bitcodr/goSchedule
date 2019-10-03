@@ -10,7 +10,6 @@ import (
 
 //SendEmail function
 func SendEmail(email model.Email) bool {
-
 	msg := "From: " + os.Getenv("MAIL_USERNAME") + "\n" +
 		"To: " + email.Receiver + "\n" +
 		"Subject:" + email.Subject + "\n\n" + email.Body
