@@ -7,8 +7,7 @@ import (
 )
 
 func main() {
-	config.Instantiate()
-	app := new(provider.App)
-	app.Task.List()
+	config.Env()
+	provider.TaskService.List()
 	fmt.Println("Done")
 }

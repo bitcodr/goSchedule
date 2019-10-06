@@ -6,12 +6,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
-//Instantiate application configs
-func Instantiate() {
-	env()
-}
-
-func env() {
+//Env config function
+func Env() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal(".env file couldn't loaded")
