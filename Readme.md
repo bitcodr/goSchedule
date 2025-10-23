@@ -31,7 +31,7 @@ goSchedule/
 
 ## Requirements
 
-- Go 1.13+
+- Go 1.21+
 - MongoDB
 - SMTP Server (for sending emails)
 
@@ -135,6 +135,92 @@ filter := &model.Filter{
 }
 ```
 
+## Testing
+
+The project includes comprehensive unit tests for all major components.
+
+### Running Tests
+
+Run all tests:
+```bash
+go test ./...
+```
+
+Run tests with verbose output:
+```bash
+go test ./... -v
+```
+
+Run tests with coverage:
+```bash
+go test ./... -cover
+```
+
+Generate detailed coverage report:
+```bash
+go test ./... -coverprofile=coverage.out
+go tool cover -html=coverage.out
+```
+
+### Test Structure
+
+The test suite covers:
+
+- **Helper Tests** (`helper/helpers_test.go`)
+  - Context timeout functionality
+  - Context cancellation behavior
+  - Deadline verification
+
+- **Model Tests** (`model/*_test.go`)
+  - Task model validation
+  - Email model validation
+  - Filter model validation
+  - Status constants verification
+
+- **Repository Tests** (`repository/task_test.go`)
+  - Repository structure validation
+  - Type checking
+  - Note: Integration tests requiring MongoDB should be run separately
+
+- **Handler Tests** (`handler/task_test.go`)
+  - TaskService initialization
+  - Context management
+  - Business logic validation
+
+### Mock Implementations
+
+Mock implementations are available for testing in `repository/mocks/`:
+
+```go
+import "github.com/amiraliio/goSchedule/repository/mocks"
+
+mockRepo := &mocks.MockTaskRepository{
+    ListFunc: func(ctx context.Context, filter *model.Filter) []*model.Task {
+        // Return test data
+        return testTasks
+    },
+}
+```
+
+### Integration Testing
+
+For integration tests that require MongoDB:
+
+1. Set up a test MongoDB instance
+2. Configure test environment variables
+3. Run integration tests separately:
+
+```bash
+go test ./repository -tags=integration
+```
+
+### Best Practices
+
+- Unit tests should not require external dependencies (database, email server)
+- Use mock implementations for testing business logic
+- Integration tests should be isolated and use test databases
+- Always clean up test data after integration tests
+
 ## Project Structure Details
 
 ### Config Package
@@ -163,6 +249,21 @@ filter := &model.Filter{
 
 ## Development
 
+### Dependencies
+
+The project uses the following main dependencies:
+
+- **MongoDB Driver**: `go.mongodb.org/mongo-driver v1.17.4` - Latest stable MongoDB driver
+- **Environment Configuration**: `github.com/joho/godotenv v1.5.1` - Environment variable management
+- **Go Version**: 1.21+ - Modern Go with latest features and performance improvements
+
+All dependencies are kept up-to-date for security and performance. To update dependencies:
+
+```bash
+go get -u ./...
+go mod tidy
+```
+
 ### Adding New Features
 
 1. Define interfaces in `repository/interfaces/`
@@ -170,6 +271,8 @@ filter := &model.Filter{
 3. Add data models in `model/`
 4. Implement repository in `repository/`
 5. Wire up dependencies in `provider/`
+6. Write unit tests for new functionality
+7. Update documentation
 
 ### Running as a Cron Job
 
