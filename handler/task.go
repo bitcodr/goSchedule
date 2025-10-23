@@ -15,6 +15,13 @@ type TaskService struct {
 	ctx context.Context
 }
 
+//NewTaskService creates a new TaskService with context
+func NewTaskService() *TaskService {
+	return &TaskService{
+		ctx: context.Background(),
+	}
+}
+
 func (s *TaskService) getTaskRepo() interfaces.TaskRepo {
 	return &repository.Repository{}
 }
